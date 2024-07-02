@@ -1,13 +1,10 @@
-import { RootState } from "@reduxjs/toolkit/query";
 import React from "react";
+import { RootState } from "@reduxjs/toolkit/query";
 import { useSelector } from "react-redux";
 import BallOver from "./BallOver";
 
 const BallOvers = () => {
   const { overs } = useSelector((state: RootState) => state.data);
-  console.log({ overs });
-
-  const newover = ["0", "1", "0", "2", "3", "4"];
 
   const oversRows = [];
   for (let i = 1; i <= overs.length; i++) {
@@ -15,7 +12,13 @@ const BallOvers = () => {
     oversRows.push(over);
   }
 
-  return <div>{oversRows}</div>;
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      {oversRows}
+    </div>
+  );
 };
 
 export default BallOvers;

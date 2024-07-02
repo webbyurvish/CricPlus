@@ -11,6 +11,7 @@ export interface DataState {
   overNumber: number;
   innings: number;
   wides: number;
+  activeTab: string;
 }
 
 const initialState: DataState = {
@@ -24,6 +25,7 @@ const initialState: DataState = {
   overNumber: 1,
   innings: 1,
   wides: 0,
+  activeTab: "scorecard",
 };
 
 const dataSlice = createSlice({
@@ -94,6 +96,9 @@ const dataSlice = createSlice({
     addBalls: (state, action) => {
       state.balls += action.payload;
     },
+    setActiveTab: (state, action) => {
+      state.activeTab = action.payload;
+    },
   },
 });
 
@@ -107,6 +112,7 @@ export const {
   reset,
   addWide,
   addNoBall,
+  setActiveTab,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -1,7 +1,5 @@
-import React from "react";
-import { RootState } from "@reduxjs/toolkit/query";
 import { useSelector } from "react-redux";
-import BallOvers from "./BallOvers";
+import { RootState } from "../Redux/RootState";
 
 const ScoreCard = () => {
   const {
@@ -14,6 +12,7 @@ const ScoreCard = () => {
     extras,
     overNumber,
     balls,
+    sixes,
   } = useSelector((state: RootState) => state.data);
 
   console.log({ overs });
@@ -30,6 +29,9 @@ const ScoreCard = () => {
         </div>
         <div style={styles.statRow}>
           <span style={styles.label}>Fours:</span> {fours}
+        </div>
+        <div style={styles.statRow}>
+          <span style={styles.label}>Sixes:</span> {sixes}
         </div>
         <div style={styles.statRow}>
           <span style={styles.label}>Extras:</span> {extras}

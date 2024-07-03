@@ -1,10 +1,15 @@
+import { Route, Routes } from "react-router";
 import "./App.css";
 import Master from "./components/Master";
+import AddMatchForm from "./adminPanel/AddMatchForm";
 
 function App() {
   return (
     <div>
-      <Master />
+      <Routes>
+        <Route element={<Master />} path="/" />
+        <Route element={<AddMatchForm />} path="/admin/addmatch" />
+      </Routes>
     </div>
   );
 }

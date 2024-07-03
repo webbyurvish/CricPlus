@@ -1,7 +1,6 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import dataReducer from "./slices/dataSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import persistedReducer from "./RootState";
 import {
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,23 +8,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import persistStore from "redux-persist/es/persistStore";
-import storage from "redux-persist/lib/storage";
-
-// Combine all reducers into a root reducer
-const rootReducer = combineReducers({
-  data: dataReducer,
-});
-
-// Configuration for Redux Persist
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["data"],
-};
-
-// Create a persisted reducer with Redux Persist configuration
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -37,8 +19,5 @@ const store = configureStore({
     }),
 });
 
-// Create the Redux persistor for persisting store state
-const persistor = persistStore(store);
-
-// Export the store and persistor
-export { store, persistor };
+export type AppDispatch = typeof store.dispatch;
+export { store };

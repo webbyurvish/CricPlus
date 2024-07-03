@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 export interface DataState {
+  innings1: Array<object>;
   matches: number;
   runs: number;
   wickets: number;
@@ -8,6 +8,7 @@ export interface DataState {
   overs: Array<Array<string>>;
   balls: number;
   fours: number;
+  sixes: number;
   overNumber: number;
   innings: number;
   wides: number;
@@ -26,6 +27,8 @@ const initialState: DataState = {
   innings: 1,
   wides: 0,
   activeTab: "scorecard",
+  sixes: 0,
+  innings1: [{}],
 };
 
 const dataSlice = createSlice({
@@ -37,8 +40,10 @@ const dataSlice = createSlice({
     },
     addWicket: (state) => {
       state.wickets += 1;
+      addRuns(0);
       if (state.overNumber == 21 || state.wickets == 10) {
         state.innings += 1;
+        state.wickets = 1;
       }
     },
     addWide: (state) => {
@@ -67,13 +72,14 @@ const dataSlice = createSlice({
         state.balls = 0;
         state.overNumber += 1;
       }
-      console.log(state.overNumber, state.wickets);
-
       if (state.overNumber == 21 || state.wickets == 10) {
         state.innings += 1;
       }
       if (action.payload == 4) {
         state.fours += 1;
+      }
+      if (action.payload == 6) {
+        state.sixes += 1;
       }
     },
     reset: (state) => {
@@ -85,6 +91,7 @@ const dataSlice = createSlice({
       state.matches = 0;
       state.balls = 0;
       state.fours = 0;
+      state.sixes = 0;
       state.innings = 1;
     },
     addExtras: (state, action) => {

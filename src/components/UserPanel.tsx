@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import Header from "./Header"; // Import Header component
 import ScoreCard from "./ScoreCard";
-import { RootState } from "@reduxjs/toolkit/query";
 import BallOvers from "./BallOvers";
+import { RootState } from "../Redux/RootState";
 
 const UserPanel = () => {
   const activeTab = useSelector((state: RootState) => state.data.activeTab);
